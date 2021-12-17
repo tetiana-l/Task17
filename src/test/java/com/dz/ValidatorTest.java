@@ -8,38 +8,32 @@ public class ValidatorTest {
 
     @Test
     public void shouldNotThrowExceptionIfSalaryPositive() {
-        Main.createEmployee("Anna", "Foe", 45550);
-        Assertions.assertFalse(Main.exeStatus);
+        Assertions.assertDoesNotThrow(() -> Main.createEmployee("Anna", "Foe", 45550));
     }
 
     @Test
     public void shouldTrowExceptionIfSalaryNegative() {
-        Main.createEmployee("Anna", "Foe", -45550);
-        Assertions.assertTrue(Main.exeStatus);
+        Assertions.assertThrows(TooSmallSalaryException.class, () -> Main.createEmployee("Anna", "Foe", -45550));
     }
 
     @Test
     public void shouldNotTrowExIfNameEnglish() {
-        Main.createEmployee("Anna", "Foe", 45550);
-        Assertions.assertFalse(Main.exeStatus);
+        Assertions.assertDoesNotThrow(() -> Main.createEmployee("Anna", "Foe", 45550));
     }
 
     @Test
     public void shouldTrowExIfNameNotEnglish() {
-        Main.createEmployee("Anna", "Вир", 45550);
-        Assertions.assertTrue(Main.exeStatus);
+        Assertions.assertThrows(ImpossibleNameException.class, () -> Main.createEmployee("Anna", "Вир", 45550));
     }
 
     @Test
     public void shouldTrowExIfNameEmptyString() {
-        Main.createEmployee("Anna", "", 45550);
-        Assertions.assertTrue(Main.exeStatus);
+        Assertions.assertThrows(ImpossibleNameException.class, () -> Main.createEmployee("Anna", "", 45550));
 
     }
 
     @Test
     public void shouldTrowExIfNameNull() {
-        Main.createEmployee(null, null, 4550);
-        Assertions.assertTrue(Main.exeStatus);
+        Assertions.assertThrows(ImpossibleNameException.class, () -> Main.createEmployee(null, null, 45550));
     }
 }
