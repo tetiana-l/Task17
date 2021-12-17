@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+package com.dz;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
 
-    public static boolean exeStatus = false;
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ImpossibleNameException, TooSmallSalaryException {
 
         List<Employee> employeeList = new ArrayList<>();
 
@@ -27,19 +31,10 @@ public class Main {
         System.out.println("EMPLOYEE LIST: \n" + employeeList);
     }
 
-    public static Employee createEmployee(String name, String surname, double salary) {
+    public static Employee createEmployee(String name, String surname, double salary) throws ImpossibleNameException, TooSmallSalaryException {
         Employee employee = null;
-        exeStatus = false;
-        try {
             employee = new Employee(name, surname, salary);
-        } catch (ImpossibleNameException | NullPointerException ex) {
-            exeStatus = true;
-            System.out.println(ex.getMessage());
-        } catch (TooSmallSalaryException ex) {
-            System.out.println(ex.getMessage() + " " + ex.getSalary());
-            exeStatus = true;
-        }
-
         return employee;
     }
 }
+
